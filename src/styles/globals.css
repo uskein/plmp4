@@ -1,0 +1,226 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --theme-bg-primary: #0A0A0A;
+  --theme-bg-secondary: #121214;
+  --theme-bg-tertiary: #1A1A1F;
+  --theme-bg-elevated: #242429;
+  --theme-text-primary: #F5F0E8;
+  --theme-text-secondary: #EDE8DA;
+  --theme-text-muted: #6B6B76;
+  --theme-text-accent: #C9A84C;
+  --theme-border-default: rgba(201, 168, 76, 0.15);
+  --theme-border-strong: rgba(201, 168, 76, 0.35);
+  --theme-accent: #C9A84C;
+  --theme-accent-light: #D4B96A;
+  --theme-accent-dark: #A8893D;
+  --theme-success: #4A9B8F;
+  --theme-warning: #B08D57;
+  --theme-danger: #6B2D3E;
+  /* Glass tokens */
+  --glass-bg: rgba(18, 18, 20, 0.6);
+  --glass-bg-heavy: rgba(18, 18, 20, 0.8);
+  --glass-bg-light: rgba(26, 26, 31, 0.4);
+  --glass-blur: 16px;
+  --glass-blur-heavy: 24px;
+}
+
+@layer base {
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  html, body, #root {
+    background-color: var(--theme-bg-primary);
+    color: var(--theme-text-primary);
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+
+  ::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: rgba(201, 168, 76, 0.15);
+    border-radius: 10px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgba(201, 168, 76, 0.3);
+  }
+
+  ::selection {
+    background: rgba(201, 168, 76, 0.25);
+    color: var(--theme-text-primary);
+  }
+
+  [data-tauri-drag-region] {
+    -webkit-app-region: drag;
+  }
+
+  [data-tauri-drag-region] button,
+  [data-tauri-drag-region] a,
+  [data-tauri-drag-region] input,
+  [data-tauri-drag-region] textarea {
+    -webkit-app-region: no-drag;
+  }
+
+  /* Override Tailwind theme classes with CSS variables */
+  .bg-imperial-black { background-color: var(--theme-bg-primary) !important; }
+  .bg-imperial-obsidian { background-color: var(--theme-bg-secondary) !important; }
+  .bg-imperial-carbon { background-color: var(--theme-bg-tertiary) !important; }
+  .bg-imperial-slate { background-color: var(--theme-bg-elevated) !important; }
+  .bg-imperial-ash { background-color: var(--theme-bg-elevated) !important; }
+
+  .text-imperial-cream { color: var(--theme-text-primary) !important; }
+  .text-imperial-parchment { color: var(--theme-text-secondary) !important; }
+  .text-imperial-bone { color: var(--theme-text-secondary) !important; }
+  .text-imperial-muted { color: var(--theme-text-muted) !important; }
+  .text-imperial-gold { color: var(--theme-text-accent) !important; }
+  .text-imperial-gold-light { color: var(--theme-accent-light) !important; }
+  .text-imperial-gold-dark { color: var(--theme-accent-dark) !important; }
+  .text-imperial-bronze { color: var(--theme-warning) !important; }
+  .text-imperial-brass { color: var(--theme-text-muted) !important; }
+  .text-imperial-wine { color: var(--theme-danger) !important; }
+  .text-imperial-wine-light { color: var(--theme-danger) !important; }
+
+  .border-imperial { border-color: var(--theme-border-default) !important; }
+  .border-imperial-strong { border-color: var(--theme-border-strong) !important; }
+
+  .placeholder-imperial-muted::placeholder { color: var(--theme-text-muted) !important; }
+}
+
+@layer components {
+  /* ─── Glass panel ─────────────────────────────────────────────── */
+  .glass {
+    background: var(--glass-bg);
+    backdrop-filter: blur(var(--glass-blur));
+    -webkit-backdrop-filter: blur(var(--glass-blur));
+    border: 1px solid var(--theme-border-default);
+  }
+
+  .glass-heavy {
+    background: var(--glass-bg-heavy);
+    backdrop-filter: blur(var(--glass-blur-heavy));
+    -webkit-backdrop-filter: blur(var(--glass-blur-heavy));
+    border: 1px solid var(--theme-border-default);
+  }
+
+  .glass-light {
+    background: var(--glass-bg-light);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--theme-border-default);
+  }
+
+  /* ─── Buttons ─────────────────────────────────────────────────── */
+  .btn-imperial {
+    @apply px-4 py-2 rounded-xl font-sans text-sm font-medium
+           transition-all duration-200 ease-out
+           active:scale-[0.97];
+    background: var(--glass-bg);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--theme-border-default);
+    color: var(--theme-text-primary);
+  }
+  .btn-imperial:hover {
+    background: var(--glass-bg-heavy);
+    border-color: var(--theme-border-strong);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.03);
+  }
+
+  .btn-gold {
+    @apply px-4 py-2 rounded-xl font-sans text-sm font-medium
+           transition-all duration-200 ease-out
+           active:scale-[0.97];
+    background: linear-gradient(135deg, var(--theme-accent) 0%, var(--theme-accent-light) 50%, var(--theme-accent-dark) 100%);
+    color: var(--theme-bg-primary);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    box-shadow: 0 2px 12px rgba(201, 168, 76, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  }
+  .btn-gold:hover {
+    box-shadow: 0 4px 24px rgba(201, 168, 76, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.25);
+    transform: translateY(-1px);
+  }
+
+  /* ─── Cards ───────────────────────────────────────────────────── */
+  .card-imperial {
+    @apply rounded-2xl overflow-hidden transition-all duration-300;
+    background: var(--glass-bg);
+    backdrop-filter: blur(var(--glass-blur));
+    -webkit-backdrop-filter: blur(var(--glass-blur));
+    border: 1px solid var(--theme-border-default);
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.02);
+  }
+  .card-imperial:hover {
+    border-color: var(--theme-border-strong);
+    box-shadow: 0 8px 40px rgba(0, 0, 0, 0.4), 0 0 20px rgba(201, 168, 76, 0.05), inset 0 1px 0 rgba(255, 255, 255, 0.04);
+    transform: translateY(-2px);
+  }
+
+  /* ─── Inputs ──────────────────────────────────────────────────── */
+  .input-imperial {
+    @apply w-full px-3 py-2 rounded-xl font-sans text-sm transition-all duration-200;
+    background: var(--glass-bg-light);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid var(--theme-border-default);
+    color: var(--theme-text-primary);
+    outline: none;
+  }
+  .input-imperial::placeholder {
+    color: var(--theme-text-muted);
+  }
+  .input-imperial:focus {
+    border-color: var(--theme-accent);
+    box-shadow: 0 0 0 2px rgba(201, 168, 76, 0.1), 0 0 20px rgba(201, 168, 76, 0.05);
+  }
+
+  /* ─── Gold gradient border ────────────────────────────────────── */
+  .gold-border-gradient {
+    border-image: linear-gradient(135deg, var(--theme-accent), var(--theme-accent-light), var(--theme-accent-dark)) 1;
+  }
+
+  /* ─── Annotation markdown ─────────────────────────────────────── */
+  .annotation-markdown img {
+    max-width: 100%;
+    border-radius: 10px;
+    margin: 4px 0;
+    border: 1px solid var(--theme-border-default);
+  }
+
+  .annotation-markdown pre {
+    background: rgba(10, 10, 10, 0.6);
+    backdrop-filter: blur(8px);
+    border-radius: 8px;
+    padding: 8px;
+    overflow-x: auto;
+    font-size: 10px;
+    margin: 4px 0;
+    border: 1px solid var(--theme-border-default);
+  }
+
+  .annotation-markdown blockquote {
+    border-left: 2px solid var(--theme-accent);
+    padding-left: 8px;
+    font-style: italic;
+    color: var(--theme-text-muted);
+    margin: 4px 0;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
